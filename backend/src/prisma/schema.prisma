@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String             @id @default(cuid())
+  createdAt     DateTime           @default(now())
+  nome          String
+  email         String             @unique
+  senhaHash     String
+  consentimento ConsentimentoLGPD?
+  preConsultas  PreConsulta[]
+}
+
+model ConsentimentoLGPD {
+  id        String   @id @default(cuid())
+  aceitouEm DateTime @default(now())
+  ipOrigem  String?
+  versao    String   @default("1.0")
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model PreConsulta {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+
+  userId            String?
+  user              User?    @relation(fields: [userId], references: [id])
+
+  nomeGestante      String
+  idadeGestante     Int
+  semanaGestacional Int
+  dum               String?
+  numGestacoes      Int      @default(1)
+
+  queixaPrincipal   String
+  sintomas          String
+  paDomiciliar      String?
+  pesoAtual         Float?
+  medicacoes        String?
+  perguntasMedico   String?
+
+  resumo            String
+  hipoteses         String
+  alertas           String
+}

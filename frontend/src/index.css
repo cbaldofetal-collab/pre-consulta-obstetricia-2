@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #F5F0E8;
+    color: #1F2937;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 143, 113, 0.15);
+    border-radius: 1rem;
+  }
+  .btn-sage {
+    background: linear-gradient(135deg, #6B8F71, #8BAF91);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-sage:hover {
+    background: linear-gradient(135deg, #5A7D60, #7A9E80);
+    transform: translateY(-1px);
+  }
+  .btn-sage:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
