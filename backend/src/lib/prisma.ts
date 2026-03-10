@@ -8,10 +8,15 @@ const cleanDatabaseUrl = (url?: string) => {
     return url.trim().replace(/[\r\n\t]/g, '');
 };
 
+console.log('🔑 Chaves de Ambiente:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('URL')));
+
 const databaseUrl = cleanDatabaseUrl(process.env.DATABASE_URL);
 
-if (!databaseUrl) {
-    console.warn('⚠️ DATABASE_URL não encontrada nas variáveis de ambiente.');
+if (databaseUrl) {
+    const masked = databaseUrl.replace(/:[^@:]+@/, ':****@');
+    console.log('📡 Usando DATABASE_URL (limpa):', masked);
+} else {
+    console.warn('⚠️ DATABASE_URL não encontrada!');
 }
 
 export const prisma = new PrismaClient({
@@ -21,5 +26,6 @@ export const prisma = new PrismaClient({
         },
     },
 });
+
 
 export default prisma;
