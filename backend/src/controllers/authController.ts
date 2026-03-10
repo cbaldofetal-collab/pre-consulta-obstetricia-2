@@ -59,9 +59,9 @@ export async function register(req: Request, res: Response) {
       token,
       user: { id: user.id, nome: user.nome, email: user.email },
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+  } catch (err: any) {
+    console.error('❌ ERRO NO REGISTRO:', err);
+    res.status(500).json({ error: 'Erro ao cadastrar usuário.', details: err.message });
   }
 }
 
@@ -92,8 +92,8 @@ export async function login(req: Request, res: Response) {
       token,
       user: { id: user.id, nome: user.nome, email: user.email },
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro ao fazer login.' });
+  } catch (err: any) {
+    console.error('❌ ERRO NO LOGIN:', err);
+    res.status(500).json({ error: 'Erro ao fazer login.', details: err.message });
   }
 }
