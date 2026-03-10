@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma';
 import { processarFormulario } from '../lib/hipoteses';
 import { gerarPdf } from '../lib/gerarPdf';
 import type { Sintoma, Hipotese, Alerta } from '../lib/hipoteses';
 import type { AuthRequest } from '../middleware/authMiddleware';
 
-const prisma = new PrismaClient();
 const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:5174';
 const BACKEND_URL = process.env.BACKEND_URL ?? `http://localhost:${process.env.PORT ?? 3002}`;
 

@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma';
 import { hashSenha, compararSenha, gerarToken } from '../lib/auth';
 
-const prisma = new PrismaClient();
 
 export async function register(req: Request, res: Response) {
   try {
